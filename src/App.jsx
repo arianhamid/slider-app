@@ -5,12 +5,13 @@ import data from "./data";
 function App() {
   const [people, setPeople] = useState(data);
   const [index, setIndex] = useState(0);
-  // console.log(index);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIndex(index + 1);
-  //   }, 3000);
-  // }, [index]);
+
+  useEffect(() => {
+    const slider = setInterval(() => {
+      setIndex(index + 1);
+    }, 3000);
+    return () => clearTimeout(slider);
+  }, [index]);
   useEffect(() => {
     const lastIndex = people.length - 1;
     if (index < 0) {
@@ -59,7 +60,6 @@ function App() {
             setIndex((prev) => {
               const newIndex = prev - 1;
               const index = newIndex;
-              console.log(index);
               return index;
             })
           }
@@ -72,7 +72,6 @@ function App() {
             setIndex((prev) => {
               const newIndex = prev + 1;
               const index = newIndex;
-              console.log(index);
               return index;
             })
           }
